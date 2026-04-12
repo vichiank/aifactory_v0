@@ -16,7 +16,9 @@ import {
   Building2,
   Receipt,
   ArrowDown,
-  Search
+  Search,
+  Workflow,
+  Layout
 } from "lucide-react";
 import { 
   ResponsiveContainer, 
@@ -196,46 +198,73 @@ export function FinanceReconciliationProject({ onBack }: FinanceReconciliationPr
       onBack={onBack}
       title="AI Finance Reconciliation"
       description="Automating enterprise-grade financial reconciliation using fuzzy logic and LLM-based anomaly detection to ensure 100% transaction integrity."
-      tags={["Java", "Spring Boot", "Azure OpenAI", "PostgreSQL", "Fuzzy Logic"]}
+      domain="Finance & Compliance"
+      tags={["AI Automation Use Case", "Anomaly Detection", "Financial Integrity"]}
       heroIcon={ShieldCheck}
       heroBanner={<FuturisticFinanceDashboard />}
-      goal="Automate financial reconciliation processes using data automation and AI anomaly detection to eliminate manual comparison between accounting platforms, payment gateways, and bank statements."
       businessContext="Finance teams must regularly reconcile financial records to ensure transaction accuracy across ERP platforms, payment processors, and financial ledgers. This is a critical compliance and operational task that ensures the integrity of the company's financial state."
+      businessIcon={Building2}
       challenges={[
-        "Mismatched transaction records across fragmented financial systems.",
-        "Manual, labor-intensive comparison between ERP and bank statements.",
-        "Delayed financial reporting due to end-of-month reconciliation bottlenecks.",
-        "High risk of human error in identifying subtle transaction discrepancies."
+        "Mismatched transaction records across fragmented systems",
+        "Manual, labor-intensive comparison between ERP and bank statements",
+        "Delayed financial reporting due to end-of-month bottlenecks",
+        "High risk of human error in identifying subtle discrepancies"
       ]}
-      opportunityAnalysis={[
-        { process: "Transaction matching", potential: "High", opportunity: "Automated record matching using fuzzy logic and metadata." },
-        { process: "Exception detection", potential: "High", opportunity: "AI anomaly detection to flag suspicious or mismatched entries." },
-        { process: "Reconciliation reporting", potential: "Medium", opportunity: "Automated report generation with flagged discrepancies." }
-      ]}
-      solutionOverview="An AI-powered reconciliation system that automatically compares transaction records from multiple financial systems, identifies mismatches, and uses LLMs to explain discrepancies, enabling faster and more accurate financial closing."
+      aiOpportunity={{
+        title: "Autonomous Financial Integrity",
+        description: "Transforming manual audit processes into a real-time, AI-driven reconciliation engine that ensures 100% data accuracy.",
+        features: [
+          "Automated record matching using fuzzy logic and metadata",
+          "AI anomaly detection to flag suspicious or mismatched entries",
+          "Automated report generation with flagged discrepancies",
+          "LLM-based explanation of complex transaction errors"
+        ]
+      }}
+      solutionOverview="An AI-powered reconciliation system that automatically compares transaction records from multiple financial systems, identifies mismatches, and uses LLMs to explain discrepancies."
       workflowSteps={[
-        { label: "Data Sources", icon: Building2, sub: "ERP & Bank Records", description: "Ingesting data from Accounting Systems, Payment Gateways, and Bank Statements." },
-        { label: "Aggregation", icon: Database, sub: "Normalization", description: "Cleaning and normalizing fragmented financial data into a unified schema." },
-        { label: "AI Engine", icon: Cpu, sub: "Reconciliation", description: "AI-driven transaction matching and advanced anomaly detection engine." },
-        { label: "Finance Output", icon: FileText, sub: "Reports & Flags", description: "Generating reconciliation reports and flagging discrepancies for review." }
+        { label: "Data Sources", icon: Building2, sub: "ERP & Bank", description: "Ingesting data from Accounting Systems, Payment Gateways, and Bank Statements." },
+        { label: "Processing", icon: Database, sub: "Normalization", description: "Cleaning and normalizing fragmented financial data into a unified schema." },
+        { label: "AI Analysis", icon: Cpu, sub: "Matching Engine", description: "AI-driven transaction matching and advanced anomaly detection engine." },
+        { label: "Output", icon: FileText, sub: "Reports & Flags", description: "Generating reconciliation reports and flagging discrepancies for review." }
       ]}
       architecture={[
-        { title: "Financial Data Ingestion", description: "Secure API connectors for ERP systems (SAP/Oracle) and bank statement parsers." },
-        { title: "Fuzzy Matching Engine", description: "Custom algorithms for matching transactions based on amount, date, and metadata." },
-        { title: "AI Anomaly Layer", description: "Azure OpenAI models trained to identify patterns of fraud or systemic errors." },
-        { title: "Reporting Interface", description: "Real-time dashboard for finance teams to review and resolve flagged items." }
-      ]}
-      techStack={[
-        { category: "AI & Logic", tools: ["Azure OpenAI", "FuzzyWuzzy", "Python"] },
-        { category: "Backend", tools: ["Java", "Spring Boot", "PostgreSQL"] },
-        { category: "Integration", tools: ["REST APIs", "SFTP", "OAuth 2.0"] },
-        { category: "Frontend", tools: ["React", "Tailwind CSS", "Recharts"] }
+        { 
+          id: "ingestion", 
+          title: "Data Ingestion Layer", 
+          description: "Secure API connectors for ERP systems and bank statement parsers.",
+          icon: Database,
+          position: { x: 20, y: 30 },
+          connections: ["matching"]
+        },
+        { 
+          id: "matching", 
+          title: "Automation Engine", 
+          description: "Custom algorithms for matching transactions based on amount and metadata.",
+          icon: Workflow,
+          position: { x: 50, y: 30 },
+          connections: ["ai"]
+        },
+        { 
+          id: "ai", 
+          title: "AI Processing Layer", 
+          description: "Azure OpenAI models trained to identify patterns of fraud or error.",
+          icon: Cpu,
+          position: { x: 80, y: 30 },
+          connections: ["ui"]
+        },
+        { 
+          id: "ui", 
+          title: "Output Interface", 
+          description: "Real-time dashboard for finance teams to review flagged items.",
+          icon: Layout,
+          position: { x: 50, y: 70 }
+        }
       ]}
       impact={[
-        { label: "Manual Work", value: "-85%", desc: "Reduction in manual reconciliation hours per month." },
-        { label: "Closing Cycle", value: "3 Days", desc: "Faster end-of-month financial closing speed." },
-        { label: "Data Accuracy", value: "99.9%", desc: "Improvement in financial record integrity." },
-        { label: "Error Detection", value: "4x", desc: "Increase in early detection of transaction discrepancies." }
+        { label: "Efficiency Improvement", value: "-85%", desc: "Reduction in manual reconciliation hours per month." },
+        { label: "Automation Coverage", value: "96%", desc: "Of transactions matched automatically by AI." },
+        { label: "Operational Speed", value: "3 Days", desc: "Faster end-of-month financial closing cycle." },
+        { label: "Data Accuracy", value: "99.9%", desc: "Improvement in financial record integrity." }
       ]}
       transformationInsight="Financial operations contain many repetitive verification processes that benefit significantly from AI-assisted anomaly detection. Combining business process understanding with AI enables finance teams to operate with higher accuracy and scalability."
     >

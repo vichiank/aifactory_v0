@@ -8,7 +8,8 @@ import {
   Search,
   MessageCircle,
   CheckCircle2,
-  Workflow
+  Workflow,
+  Layout
 } from "lucide-react";
 import { ProjectCaseStudy } from "./ProjectCaseStudy";
 
@@ -67,47 +68,73 @@ export function ProjectPage({ onBack }: ProjectPageProps) {
       onBack={onBack}
       title="AI Customer Support Copilot"
       description="Augmenting support agents with real-time, context-aware response drafts using RAG and Large Language Models."
-      tags={["Python", "LangChain", "OpenAI", "Pinecone", "RAG"]}
+      domain="Operations & Support"
+      tags={["AI Automation Use Case", "Concept Solution", "RAG", "LLM"]}
       heroIcon={MessageSquare}
       heroBanner={<SupportCopilotIllustration />}
-      goal="Improve customer support productivity and reduce response time by providing agents with intelligent, pre-drafted responses based on internal knowledge bases."
-      businessContext="Customer support teams often face high volumes of repetitive inquiries, requiring agents to manually search through fragmented documentation and wikis to provide accurate answers."
+      businessContext="Customer support teams in high-growth organizations often face high volumes of repetitive inquiries, requiring agents to manually search through fragmented documentation and wikis to provide accurate answers."
+      businessIcon={Users}
       challenges={[
-        "High Average Handle Time (AHT) due to manual information retrieval.",
-        "Inconsistent response quality across different support agents.",
-        "Difficulty scaling support operations during peak inquiry periods.",
-        "Knowledge silos making it hard for new agents to find correct information."
+        "Manual information retrieval from fragmented sources",
+        "Inconsistent response quality across support agents",
+        "Scaling challenges during peak inquiry periods",
+        "Knowledge silos hindering new agent onboarding"
       ]}
-      opportunityAnalysis={[
-        { process: "Ticket Classification", potential: "High", opportunity: "Automated intent and sentiment analysis." },
-        { process: "Information Retrieval", potential: "High", opportunity: "Semantic search across internal documentation." },
-        { process: "Response Drafting", potential: "High", opportunity: "LLM-based synthesis of personalized drafts." },
-        { process: "Quality Assurance", potential: "Medium", opportunity: "Automated brand voice and accuracy checks." }
-      ]}
-      solutionOverview="A Retrieval-Augmented Generation (RAG) system that integrates with ticketing platforms to analyze incoming queries, retrieve relevant documentation, and present agents with high-quality response drafts."
+      aiOpportunity={{
+        title: "Intelligent Agent Augmentation",
+        description: "Transforming support from a manual search process into an AI-driven synthesis workflow, enabling agents to focus on complex problem-solving.",
+        features: [
+          "Automated intent and sentiment analysis",
+          "Semantic search across internal documentation",
+          "LLM-based synthesis of personalized drafts",
+          "Real-time brand voice and accuracy checks"
+        ]
+      }}
+      solutionOverview="A Retrieval-Augmented Generation (RAG) system that integrates with ticketing platforms to analyze incoming queries and present agents with high-quality response drafts."
       workflowSteps={[
-        { label: "Inquiry", icon: MessageCircle, sub: "Customer Ticket", description: "Incoming customer support requests from Zendesk, Intercom, or email channels." },
-        { label: "Search", icon: Search, sub: "Semantic RAG", description: "Retrieving relevant context from internal knowledge bases using vector search." },
-        { label: "Synthesis", icon: Cpu, sub: "LLM Drafting", description: "AI generates a personalized, context-aware response draft for the agent." },
-        { label: "Review", icon: Users, sub: "Agent Approval", description: "Human support agents review, refine, and send the AI-suggested response." }
+        { label: "Data Sources", icon: Database, sub: "Knowledge Base", description: "Internal documentation, FAQs, and historical ticket data." },
+        { label: "Processing", icon: Search, sub: "Semantic RAG", description: "Retrieving relevant context from internal knowledge bases using vector search." },
+        { label: "AI Analysis", icon: Cpu, sub: "LLM Drafting", description: "AI generates a personalized, context-aware response draft for the agent." },
+        { label: "Output", icon: MessageCircle, sub: "Agent Review", description: "Human support agents review, refine, and send the AI-suggested response." }
       ]}
       architecture={[
-        { title: "Vector Database", description: "Pinecone stores company documentation as high-dimensional embeddings for semantic retrieval." },
-        { title: "Orchestration Layer", description: "LangChain manages the flow between user query, retrieval, and LLM prompting." },
-        { title: "LLM Engine", description: "OpenAI GPT-4o generates natural, context-aware responses based on retrieved context." },
-        { title: "Integration API", description: "Custom middleware connecting the copilot to Zendesk or Salesforce Service Cloud." }
-      ]}
-      techStack={[
-        { category: "AI Frameworks", tools: ["LangChain", "OpenAI API", "LlamaIndex"] },
-        { category: "Vector Storage", tools: ["Pinecone", "Weaviate"] },
-        { category: "Backend", tools: ["Python", "FastAPI", "Docker"] },
-        { category: "Frontend", tools: ["React", "Tailwind CSS"] }
+        { 
+          id: "data", 
+          title: "Data Integration Layer", 
+          description: "Connectors for Zendesk, Salesforce, and internal wikis.",
+          icon: Database,
+          position: { x: 20, y: 30 },
+          connections: ["engine"]
+        },
+        { 
+          id: "engine", 
+          title: "Automation Engine", 
+          description: "LangChain orchestrates the RAG workflow and prompt management.",
+          icon: Workflow,
+          position: { x: 50, y: 30 },
+          connections: ["ai"]
+        },
+        { 
+          id: "ai", 
+          title: "AI Processing Layer", 
+          description: "OpenAI GPT-4o generates responses based on retrieved context.",
+          icon: Cpu,
+          position: { x: 80, y: 30 },
+          connections: ["ui"]
+        },
+        { 
+          id: "ui", 
+          title: "Output Interface", 
+          description: "Agent-facing dashboard for reviewing and sending drafts.",
+          icon: Layout,
+          position: { x: 50, y: 70 }
+        }
       ]}
       impact={[
-        { label: "Handle Time", value: "-45%", desc: "Reduction in average time spent per support ticket." },
-        { label: "Resolution", value: "+30%", desc: "Increase in first-contact resolution (FCR) rates." },
-        { label: "Onboarding", value: "2x", desc: "Faster ramp-up time for new support agents." },
-        { label: "CSAT", value: "+15pt", desc: "Improvement in customer satisfaction scores." }
+        { label: "Efficiency Improvement", value: "-45%", desc: "Reduction in average handle time (AHT)." },
+        { label: "Automation Coverage", value: "85%", desc: "Of common support inquiries handled by AI drafts." },
+        { label: "Operational Speed", value: "2x", desc: "Faster response times during peak periods." },
+        { label: "CSAT Score", value: "+15pt", desc: "Improvement in customer satisfaction." }
       ]}
       transformationInsight="AI in customer support is most effective when positioned as a 'Copilot'—empowering human agents with instant access to enterprise knowledge rather than fully automating the human touch."
     />

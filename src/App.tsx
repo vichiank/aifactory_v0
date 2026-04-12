@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Sidebar } from "@/components/Sidebar";
 import { ProjectCard } from "@/components/ProjectCard";
-import { ArchitectureDiagram } from "@/components/ArchitectureDiagram";
+import { AnimatedArchitectureDiagram } from "@/components/AnimatedArchitectureDiagram";
 import { ProjectPage } from "@/components/ProjectPage";
 import { ProjectPageMarketplace } from "@/components/ProjectPageMarketplace";
 import { AboutPage } from "@/components/AboutPage";
@@ -10,6 +10,8 @@ import { FinanceReconciliationProject } from "@/components/FinanceReconciliation
 import { KnowledgeAssistantProject } from "@/components/KnowledgeAssistantProject";
 import { DemandForecastingProject } from "@/components/DemandForecastingProject";
 import { NeuralBackground } from "@/components/NeuralBackground";
+import { StrategicFramework } from "@/components/StrategicFramework";
+import { ContactHeader } from "@/components/ContactHeader";
 import { 
   MessageSquare, 
   Wand2, 
@@ -121,7 +123,10 @@ export default function App() {
 
   const handleViewChange = (view: any) => {
     if (view === currentView) return;
-    setIsSidebarOpen(false); // Collapse sidebar when navigating
+    // Collapse sidebar when navigating (Mobile only)
+    if (window.innerWidth < 1024) {
+      setIsSidebarOpen(false);
+    }
     setIsLoading(true);
     setTimeout(() => {
       setCurrentView(view);
@@ -141,7 +146,8 @@ export default function App() {
       
       <main className={cn(
         "flex-1 min-w-0 transition-all duration-500 relative",
-        isSidebarOpen ? "lg:ml-[300px]" : "ml-0"
+        "lg:ml-[300px]", // Always have margin on desktop
+        isSidebarOpen ? "ml-0" : "ml-0" // Mobile logic handled by sidebar overlay
       )}>
         {/* Background Visual Details */}
         <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
@@ -152,20 +158,17 @@ export default function App() {
         {/* Top Dashboard Header */}
         <header className="sticky top-0 z-40 glass border-b border-cyan-400/20 px-8 py-6 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            {!isSidebarOpen && (
-              <Button
-                variant="ghost"
-                size="icon"
-                className="text-white/60 hover:text-accent-cyan transition-colors"
-                onClick={() => setIsSidebarOpen(true)}
-                onMouseEnter={() => setIsSidebarOpen(true)}
-              >
-                <Menu className="h-5 w-5" />
-              </Button>
-            )}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-white/60 hover:text-accent-cyan transition-colors lg:hidden"
+              onClick={() => setIsSidebarOpen(true)}
+            >
+              <Menu className="h-5 w-5" />
+            </Button>
             <div className="flex flex-col">
               <h2 className="text-2xl font-display font-bold text-white tracking-tight relative">
-                {currentView === "landing" ? "Dashboard Overview" : "Case Study Analysis"}
+                {currentView === "landing" ? "Dashboard Overview" : "Use Case Analysis"}
                 <div className="absolute -bottom-1 left-0 w-12 h-0.5 bg-accent-cyan shadow-[0_0_10px_rgba(0,245,255,0.8)]" />
               </h2>
               <p className="text-[10px] font-mono text-white/40 uppercase tracking-[0.2em] mt-1">
@@ -273,13 +276,30 @@ export default function App() {
                 <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] bg-accent-violet/5 blur-[100px] rounded-full pointer-events-none" />
               </section>
 
+              {/* Architecture Section */}
+              <section id="architecture" className="py-12 px-8 lg:px-16 bg-white/[0.02]">
+                <div className="text-center max-w-3xl mx-auto mb-12">
+                  <h2 className="text-3xl font-display font-bold mb-4">Enterprise AI Architecture</h2>
+                  <p className="text-white/50">
+                    A modular, scalable, and secure architecture designed to transform raw enterprise data into strategic intelligence through autonomous agents and predictive models.
+                  </p>
+                </div>
+                
+                <AnimatedArchitectureDiagram />
+              </section>
+
+              <StrategicFramework />
+
               {/* Projects Grid */}
-              <section id="projects" className="py-20 px-8 lg:px-16">
+              <section id="projects" className="pt-8 pb-24 px-8 lg:px-16 max-w-7xl mx-auto">
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
                   <div>
-                    <h2 className="text-3xl font-display font-bold mb-4">AI Automation Projects</h2>
+                    <h2 className="text-3xl font-display font-bold mb-2">AI Transformation Use Cases</h2>
+                    <p className="text-[10px] font-mono text-accent-cyan uppercase tracking-[0.3em] mb-4">
+                      Real-World AI Transformation Use Cases
+                    </p>
                     <p className="text-white/50 max-w-xl">
-                      A curated selection of production-ready AI solutions designed to solve complex business challenges through intelligent automation.
+                      Practical applications of the AI Transformation Framework, demonstrating production-ready solutions for complex business challenges.
                     </p>
                   </div>
                   <div className="flex items-center gap-4">
@@ -333,26 +353,16 @@ export default function App() {
                 </div>
               </section>
 
-              {/* Architecture Section */}
-              <section id="architecture" className="py-20 px-8 lg:px-16 bg-white/[0.02]">
-                <div className="text-center max-w-3xl mx-auto mb-16">
-                  <h2 className="text-3xl font-display font-bold mb-4">System Architecture</h2>
-                  <p className="text-white/50">
-                    My approach focuses on scalable, secure, and modular AI architectures that integrate seamlessly with existing enterprise ecosystems.
-                  </p>
-                </div>
-                
-                <ArchitectureDiagram />
-              </section>
-
               {/* Contact Section */}
-              <section id="contact" className="py-32 px-8 lg:px-16">
-                <div className="glass rounded-3xl p-12 lg:p-20 border border-white/10 relative overflow-hidden">
+              <section id="contact" className="py-32 px-8 lg:px-16 max-w-7xl mx-auto">
+                <div className="glass rounded-3xl p-8 lg:p-12 border border-white/10 relative overflow-hidden">
                   <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500/10 blur-[100px] rounded-full -translate-y-1/2 translate-x-1/2" />
                   
-                  <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16">
+                  <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
                     <div>
-                      <h2 className="text-4xl lg:text-5xl font-display font-bold mb-6">Let's Build the Future Together</h2>
+                      <div className="mb-8">
+                        <ContactHeader />
+                      </div>
                       <p className="text-white/60 text-lg mb-10 leading-relaxed">
                         Interested in transforming your business with AI? I'm currently open to consulting projects and strategic partnerships.
                       </p>
@@ -458,10 +468,10 @@ export default function App() {
                 <div className="flex flex-col md:flex-row justify-between items-center gap-6">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl bg-accent-cyan/10 border border-cyan-400/40 flex items-center justify-center shadow-[0_0_12px_rgba(0,255,255,0.4)]">
-                      <Cpu className="text-accent-cyan h-6 w-6" />
+                      <Cpu className="text-accent-cyan h-6 w-6 animate-pulse" />
                     </div>
                     <div>
-                      <h3 className="text-lg font-display font-bold tracking-tighter text-white leading-none">
+                      <h3 className="text-lg font-display font-bold tracking-tighter neon-text-cyan leading-none">
                         @i-Factory
                       </h3>
                       <p className="text-[8px] font-mono text-accent-violet tracking-[0.2em] uppercase opacity-80 mt-1">

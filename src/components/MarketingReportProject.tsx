@@ -2,21 +2,22 @@ import * as React from "react";
 import { 
   BarChart3, 
   Globe, 
-  Zap,
-  TrendingUp,
-  Workflow,
-  ArrowRight,
-  Target,
-  Layers,
-  Table as TableIcon,
-  Lightbulb,
-  Shield,
-  ArrowDown,
-  Database,
-  Cpu,
-  FileSpreadsheet,
-  Presentation,
-  UserIcon
+  Zap, 
+  TrendingUp, 
+  Workflow, 
+  ArrowRight, 
+  Target, 
+  Layers, 
+  Table as TableIcon, 
+  Lightbulb, 
+  Shield, 
+  ArrowDown, 
+  Database, 
+  Cpu, 
+  FileSpreadsheet, 
+  Presentation, 
+  UserIcon,
+  Layout
 } from "lucide-react";
 import { 
   ResponsiveContainer, 
@@ -211,47 +212,73 @@ export function MarketingReportProject({ onBack }: MarketingReportProjectProps) 
       onBack={onBack}
       title="AI Marketing Report Generator"
       description="Automating marketing analytics and reporting by generating intelligent insights from campaign data across multiple platforms."
-      tags={["Python", "CrewAI", "Google Analytics", "D3.js", "LLM"]}
+      domain="Marketing & Analytics"
+      tags={["AI Automation Use Case", "Agentic AI", "Data Synthesis"]}
       heroIcon={BarChart3}
       heroBanner={<FuturisticDashboard />}
-      goal="Streamline marketing analytics by automating data aggregation and using Generative AI to produce professional, insight-driven performance reports."
       businessContext="Marketing teams manage campaigns across multiple fragmented platforms (Google, Meta, LinkedIn). Manually compiling this data into actionable reports is a high-frequency, low-value task that delays strategic decision-making."
+      businessIcon={Globe}
       challenges={[
-        "Data scattered across multiple advertising and analytics platforms.",
-        "Manual report preparation taking 10+ hours per week per analyst.",
-        "Delayed insights leading to slow campaign optimization cycles.",
-        "Inconsistent reporting formats and human error in data entry."
+        "Data scattered across multiple advertising and analytics platforms",
+        "Manual report preparation taking 10+ hours per week per analyst",
+        "Delayed insights leading to slow campaign optimization cycles",
+        "Inconsistent reporting formats and human error in data entry"
       ]}
-      opportunityAnalysis={[
-        { process: "Data Collection", potential: "High", opportunity: "Automated API aggregation from all platforms." },
-        { process: "Performance Analysis", potential: "High", opportunity: "AI-driven trend detection and anomaly flagging." },
-        { process: "Insight Generation", potential: "Medium", opportunity: "LLM-based synthesis of raw data into narrative insights." },
-        { process: "Report Formatting", potential: "High", opportunity: "Automated PDF/Slide generation with dynamic charts." }
-      ]}
-      solutionOverview="A fully automated pipeline that connects to marketing APIs, aggregates performance metrics, and uses an AI Agent (CrewAI) to analyze trends and generate professional reports with actionable recommendations."
+      aiOpportunity={{
+        title: "Agentic Marketing Intelligence",
+        description: "Transforming raw campaign metrics into strategic narratives by deploying specialized AI agents for data analysis and strategy synthesis.",
+        features: [
+          "Automated API aggregation from all major ad platforms",
+          "AI-driven trend detection and anomaly flagging",
+          "LLM-based synthesis of raw data into narrative insights",
+          "Automated report generation with dynamic visualizations"
+        ]
+      }}
+      solutionOverview="A fully automated pipeline that connects to marketing APIs, aggregates performance metrics, and uses an AI Agent (CrewAI) to analyze trends and generate professional reports."
       workflowSteps={[
-        { label: "Data Sources", icon: Globe, sub: "Google/Meta Ads", description: "Connecting to marketing APIs (Google Ads, Meta, LinkedIn) to pull raw campaign metrics." },
-        { label: "Aggregation", icon: Database, sub: "Centralized Sync", description: "Cleaning and normalizing fragmented data into a unified PostgreSQL database." },
+        { label: "Data Sources", icon: Globe, sub: "Ad Platforms", description: "Connecting to marketing APIs (Google Ads, Meta, LinkedIn) to pull raw campaign metrics." },
+        { label: "Processing", icon: Database, sub: "Centralized Sync", description: "Cleaning and normalizing fragmented data into a unified PostgreSQL database." },
         { label: "AI Analysis", icon: Cpu, sub: "Insight Engine", description: "CrewAI agents analyze trends, detect anomalies, and synthesize performance narratives." },
-        { label: "Auto Report", icon: FileSpreadsheet, sub: "Final Output", description: "Generating professional PDF and D3.js interactive reports for stakeholders." }
+        { label: "Output", icon: FileSpreadsheet, sub: "Auto Report", description: "Generating professional PDF and D3.js interactive reports for stakeholders." }
       ]}
       architecture={[
-        { title: "Data Ingestion Layer", description: "Python-based connectors for Google Ads, Meta Graph API, and LinkedIn Marketing API." },
-        { title: "Automation Engine", description: "Workflow orchestration using n8n or Make.com to trigger weekly syncs." },
-        { title: "AI Insight Engine", description: "CrewAI agents specializing in 'Data Analysis' and 'Marketing Strategy' using GPT-4o." },
-        { title: "Reporting Layer", description: "Dynamic report generation using D3.js for visualizations and PDF synthesis." }
-      ]}
-      techStack={[
-        { category: "AI & Logic", tools: ["CrewAI", "LangChain", "GPT-4o"] },
-        { category: "Data", tools: ["Python", "Pandas", "PostgreSQL"] },
-        { category: "Automation", tools: ["n8n", "GitHub Actions"] },
-        { category: "Visualization", tools: ["D3.js", "Recharts", "React"] }
+        { 
+          id: "ingestion", 
+          title: "Data Ingestion Layer", 
+          description: "Python-based connectors for Google Ads, Meta Graph, and LinkedIn APIs.",
+          icon: Database,
+          position: { x: 20, y: 30 },
+          connections: ["workflow"]
+        },
+        { 
+          id: "workflow", 
+          title: "Automation Engine", 
+          description: "Workflow orchestration using n8n to trigger weekly data syncs.",
+          icon: Workflow,
+          position: { x: 50, y: 30 },
+          connections: ["ai"]
+        },
+        { 
+          id: "ai", 
+          title: "AI Processing Layer", 
+          description: "CrewAI agents specializing in data analysis and strategy using GPT-4o.",
+          icon: Cpu,
+          position: { x: 80, y: 30 },
+          connections: ["ui"]
+        },
+        { 
+          id: "ui", 
+          title: "Output Interface", 
+          description: "Dynamic report generation using D3.js and PDF synthesis.",
+          icon: Layout,
+          position: { x: 50, y: 70 }
+        }
       ]}
       impact={[
-        { label: "Reporting Speed", value: "95%", desc: "Reduction in time from data sync to final report." },
-        { label: "Manual Effort", value: "-12h", desc: "Hours saved per week per marketing analyst." },
-        { label: "Optimization", value: "2x", desc: "Increase in frequency of campaign adjustments." },
-        { label: "Accuracy", value: "100%", desc: "Elimination of manual data entry errors." }
+        { label: "Efficiency Improvement", value: "95%", desc: "Reduction in time from data sync to final report." },
+        { label: "Automation Coverage", value: "100%", desc: "Elimination of manual data entry and formatting tasks." },
+        { label: "Operational Speed", value: "2x", desc: "Increase in frequency of campaign adjustments." },
+        { label: "Manual Effort", value: "-12h", desc: "Hours saved per week per marketing analyst." }
       ]}
       transformationInsight="Successful AI transformation in marketing isn't just about automation; it's about shifting the analyst's role from 'Data Gatherer' to 'Strategic Optimizer' by leveraging intelligent data synthesis."
     >

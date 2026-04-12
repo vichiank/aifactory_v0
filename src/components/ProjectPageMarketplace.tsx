@@ -60,41 +60,67 @@ export function ProjectPageMarketplace({ onBack }: ProjectPageProps) {
       onBack={onBack}
       title="AI Marketplace Listing Generator"
       description="Automating the creation of high-converting product titles, descriptions, and SEO tags for e-commerce platforms using multi-modal AI."
-      tags={["TypeScript", "Next.js", "Gemini Pro Vision", "Tailwind", "Multi-modal"]}
+      domain="E-commerce & Retail"
+      tags={["AI Automation Use Case", "Multi-modal AI", "SEO Optimization"]}
       heroIcon={ShoppingBag}
       heroBanner={<MarketplaceIllustration />}
-      goal="Accelerate time-to-market for e-commerce inventory by automating the generation of marketplace-ready content from raw product data and images."
       businessContext="E-commerce retailers managing thousands of SKUs across multiple platforms (Amazon, eBay, Shopify) often face bottlenecks in content creation, leading to delayed product launches and inconsistent brand representation."
+      businessIcon={Globe}
       challenges={[
-        "Manual drafting of thousands of product descriptions is slow and error-prone.",
-        "Inconsistent tone and quality across different sales channels.",
-        "Delayed time-to-market for seasonal collections due to content bottlenecks.",
-        "Suboptimal SEO performance due to lack of systematic keyword research."
+        "Manual drafting of thousands of product descriptions is slow and error-prone",
+        "Inconsistent tone and quality across different sales channels",
+        "Delayed time-to-market for seasonal collections due to content bottlenecks",
+        "Suboptimal SEO performance due to lack of systematic keyword research"
       ]}
-      opportunityAnalysis={[
-        { process: "Visual Feature Extraction", potential: "High", opportunity: "Multi-modal AI analysis of product images." },
-        { process: "Copywriting", potential: "High", opportunity: "LLM-based generation of persuasive descriptions." },
-        { process: "SEO Tagging", potential: "High", opportunity: "Automated keyword injection based on search trends." },
-        { process: "Platform Formatting", potential: "High", opportunity: "Rule-based adjustment for marketplace requirements." }
-      ]}
+      aiOpportunity={{
+        title: "Multi-modal Content Generation",
+        description: "Leveraging vision-language models to transform raw product assets into optimized digital storefronts at scale.",
+        features: [
+          "Visual feature extraction from product images",
+          "LLM-based generation of persuasive descriptions",
+          "Automated keyword injection based on search trends",
+          "Rule-based adjustment for marketplace requirements"
+        ]
+      }}
       solutionOverview="A multi-modal AI pipeline that analyzes product images and technical specifications to generate optimized, platform-specific listings that drive conversion and improve search visibility."
       workflowSteps={[
-        { label: "Assets", icon: ImageIcon, sub: "Images & Data", description: "Ingesting raw product images and technical specifications from the PIM system." },
-        { label: "Analysis", icon: Cpu, sub: "Vision Model", description: "Multi-modal AI extracts visual features, colors, and styles from product media." },
-        { label: "Synthesis", icon: Layout, sub: "Content Engine", description: "Generating SEO-optimized titles and descriptions tailored for each marketplace." },
-        { label: "Publish", icon: Globe, sub: "Multi-Channel", description: "Automated distribution of finalized listings to Amazon, eBay, and Shopify." }
+        { label: "Data Sources", icon: Database, sub: "Images & Specs", description: "Ingesting raw product images and technical specifications from the PIM system." },
+        { label: "Processing", icon: Cpu, sub: "Vision Analysis", description: "Multi-modal AI extracts visual features, colors, and styles from product media." },
+        { label: "AI Analysis", icon: Layout, sub: "Content Synthesis", description: "Generating SEO-optimized titles and descriptions tailored for each marketplace." },
+        { label: "Output", icon: Globe, sub: "Multi-Channel", description: "Automated distribution of finalized listings to Amazon, eBay, and Shopify." }
       ]}
       architecture={[
-        { title: "Multi-modal Engine", description: "Gemini 1.5 Pro Vision analyzes product images to extract visual attributes like color, material, and style." },
-        { title: "Content Orchestrator", description: "Custom logic to tailor generated content for specific marketplace constraints (e.g. Amazon vs Shopify)." },
-        { title: "SEO Integration", description: "Real-time connection to search trend APIs to ensure listings are optimized for high-volume keywords." },
-        { title: "PIM Connector", description: "Automated sync with Product Information Management systems for seamless data flow." }
-      ]}
-      techStack={[
-        { category: "AI Models", tools: ["Gemini 1.5 Pro Vision", "GPT-4o"] },
-        { category: "Frameworks", tools: ["Next.js", "FastAPI", "Python"] },
-        { category: "APIs", tools: ["Amazon SP-API", "Shopify Admin API", "eBay API"] },
-        { category: "Storage", tools: ["PostgreSQL", "Redis", "AWS S3"] }
+        { 
+          id: "vision", 
+          title: "Multi-modal Engine", 
+          description: "Gemini 1.5 Pro Vision analyzes product images to extract visual attributes.",
+          icon: ImageIcon,
+          position: { x: 20, y: 30 },
+          connections: ["orchestrator"]
+        },
+        { 
+          id: "orchestrator", 
+          title: "Content Orchestrator", 
+          description: "Custom logic to tailor generated content for specific marketplace constraints.",
+          icon: Workflow,
+          position: { x: 50, y: 30 },
+          connections: ["seo"]
+        },
+        { 
+          id: "seo", 
+          title: "SEO Integration", 
+          description: "Real-time connection to search trend APIs for keyword optimization.",
+          icon: Search,
+          position: { x: 80, y: 30 },
+          connections: ["pim"]
+        },
+        { 
+          id: "pim", 
+          title: "PIM Connector", 
+          description: "Automated sync with Product Information Management systems.",
+          icon: Database,
+          position: { x: 50, y: 70 }
+        }
       ]}
       impact={[
         { label: "Listing Speed", value: "-80%", desc: "Reduction in time from SKU creation to live listing." },

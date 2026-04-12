@@ -17,7 +17,9 @@ import {
   Package,
   ArrowDown,
   Activity,
-  Calendar
+  Calendar,
+  Workflow,
+  Layout
 } from "lucide-react";
 import { 
   ResponsiveContainer, 
@@ -197,46 +199,73 @@ export function DemandForecastingProject({ onBack }: DemandForecastingProjectPro
       onBack={onBack}
       title="AI Demand Forecasting"
       description="Leveraging machine learning to predict product demand with high precision, optimizing inventory levels and supply chain agility for enterprise retail."
-      tags={["Python", "XGBoost", "Prophet", "AWS Forecast", "Tableau"]}
+      domain="Supply Chain & Retail"
+      tags={["AI Automation Use Case", "Predictive Analytics", "Inventory Optimization"]}
       heroIcon={TrendingUp}
       heroBanner={<ForecastingDashboardHero />}
-      goal="Improve business planning and supply chain decisions by using AI models to forecast product demand based on historical sales and market trends, reducing inventory risk and operational waste."
       businessContext="Organizations in retail, e-commerce, and manufacturing must forecast demand to plan inventory, production, and supply chain operations. Accurate forecasting is critical for maintaining service levels while minimizing capital tied up in stock."
+      businessIcon={Factory}
       challenges={[
-        "Inaccurate demand predictions leading to lost sales or excess inventory.",
-        "Inventory shortages (stockouts) or costly overstock situations.",
-        "Slow, manual forecasting processes that cannot react to market shifts.",
-        "Difficulty identifying complex seasonal demand patterns and external influences."
+        "Inaccurate demand predictions leading to lost sales or excess inventory",
+        "Inventory shortages (stockouts) or costly overstock situations",
+        "Slow, manual forecasting processes that cannot react to market shifts",
+        "Difficulty identifying complex seasonal demand patterns"
       ]}
-      opportunityAnalysis={[
-        { process: "Sales trend analysis", potential: "High", opportunity: "Machine learning forecasting to capture non-linear patterns." },
-        { process: "Inventory planning", potential: "High", opportunity: "Predictive demand models to automate safety stock levels." },
-        { process: "Business planning", potential: "Medium", opportunity: "AI-driven scenario simulation for 'what-if' strategic analysis." }
-      ]}
-      solutionOverview="Machine learning models analyze historical sales data, seasonal trends, and external factors (like promotions or market shifts) to forecast future demand patterns. This system empowers business teams to make data-driven decisions on procurement and marketing."
+      aiOpportunity={{
+        title: "Predictive Demand Intelligence",
+        description: "Transforming reactive inventory management into a proactive, data-driven planning engine using multi-variate time series analysis.",
+        features: [
+          "Machine learning forecasting to capture non-linear patterns",
+          "Predictive demand models to automate safety stock levels",
+          "AI-driven scenario simulation for 'what-if' strategic analysis",
+          "Real-time integration of external market signals"
+        ]
+      }}
+      solutionOverview="Machine learning models analyze historical sales data, seasonal trends, and external factors to forecast future demand patterns, empowering teams to make data-driven procurement decisions."
       workflowSteps={[
-        { label: "Historical Sales Data", icon: Database, sub: "Market & Promo Trends", description: "Aggregating multi-year sales data, promotional calendars, and external market signals." },
-        { label: "Data Processing", icon: Package, sub: "Feature Engineering", description: "Cleaning data and engineering features like lag variables, seasonality, and holiday effects." },
-        { label: "AI Forecasting Model", icon: Cpu, sub: "Time Series Prediction", description: "Ensemble models (XGBoost + Prophet) performing multi-horizon demand forecasting." },
-        { label: "Business Output", icon: BarChart3, sub: "Demand Dashboard", description: "Visualizing forecasts and providing automated inventory replenishment recommendations." }
+        { label: "Data Sources", icon: Database, sub: "Historical Sales", description: "Aggregating multi-year sales data, promotional calendars, and external market signals." },
+        { label: "Processing", icon: Package, sub: "Feature Engineering", description: "Cleaning data and engineering features like lag variables and seasonality." },
+        { label: "AI Analysis", icon: Cpu, sub: "Time Series Model", description: "Ensemble models (XGBoost + Prophet) performing multi-horizon demand forecasting." },
+        { label: "Output", icon: BarChart3, sub: "Demand Dashboard", description: "Visualizing forecasts and providing automated inventory replenishment recommendations." }
       ]}
       architecture={[
-        { title: "Data Ingestion Pipeline", description: "Automated ETL processes pulling from ERP (SAP/Oracle) and POS systems." },
-        { title: "Feature Engineering Layer", description: "Automated processing of temporal features and external market indicators." },
-        { title: "ML Forecasting Engine", description: "Cloud-native model training and inference pipeline using AWS Forecast or custom SageMaker models." },
-        { title: "Visualization Dashboard", description: "Interactive Tableau or PowerBI dashboards for supply chain planners." }
-      ]}
-      techStack={[
-        { category: "ML & Analytics", tools: ["Python", "XGBoost", "Facebook Prophet", "Scikit-learn"] },
-        { category: "Data Processing", tools: ["Apache Spark", "Pandas", "SQL"] },
-        { category: "Cloud & Ops", tools: ["AWS SageMaker", "Docker", "Airflow"] },
-        { category: "Visualization", tools: ["Tableau", "Recharts", "React"] }
+        { 
+          id: "ingestion", 
+          title: "Data Ingestion Layer", 
+          description: "Automated ETL processes pulling from ERP and POS systems.",
+          icon: Database,
+          position: { x: 20, y: 30 },
+          connections: ["feature"]
+        },
+        { 
+          id: "feature", 
+          title: "Automation Engine", 
+          description: "Automated processing of temporal features and market indicators.",
+          icon: Workflow,
+          position: { x: 50, y: 30 },
+          connections: ["engine"]
+        },
+        { 
+          id: "engine", 
+          title: "AI Processing Layer", 
+          description: "Cloud-native model training and inference pipeline.",
+          icon: Cpu,
+          position: { x: 80, y: 30 },
+          connections: ["viz"]
+        },
+        { 
+          id: "viz", 
+          title: "Output Interface", 
+          description: "Interactive dashboards for supply chain planners.",
+          icon: Layout,
+          position: { x: 50, y: 70 }
+        }
       ]}
       impact={[
-        { label: "Forecast Accuracy", value: "+25%", desc: "Improvement in MAPE (Mean Absolute Percentage Error) vs manual methods." },
-        { label: "Inventory Risk", value: "-18%", desc: "Reduction in overstock capital and associated holding costs." },
-        { label: "Planning Speed", value: "80%", desc: "Reduction in time required to generate monthly demand plans." },
-        { label: "Stockouts", value: "-15%", desc: "Decrease in lost sales due to out-of-stock situations." }
+        { label: "Efficiency Improvement", value: "+25%", desc: "Improvement in forecast accuracy vs manual methods." },
+        { label: "Automation Coverage", value: "80%", desc: "Reduction in time required to generate monthly plans." },
+        { label: "Operational Speed", value: "5x", desc: "Faster reaction to market demand shifts." },
+        { label: "Inventory Risk", value: "-18%", desc: "Reduction in overstock capital and holding costs." }
       ]}
       transformationInsight="Forecasting is a core capability for modern organizations. AI-powered forecasting enables companies to anticipate demand changes, optimize inventory levels, and improve operational agility in a volatile market."
     >

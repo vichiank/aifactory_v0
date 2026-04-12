@@ -15,7 +15,8 @@ import {
   BrainCircuit,
   TrendingUp,
   Menu,
-  X
+  X,
+  Zap
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -39,8 +40,8 @@ const navItems = [
   { name: "Home", icon: Home, href: "#home", view: "landing" },
   { name: "ABOUT", icon: User, href: "#about", view: "about" },
   { 
-    name: "AI Automation Projects", 
-    icon: Cpu, 
+    name: "AI Transformation Use Cases", 
+    icon: Zap, 
     href: "#projects",
     view: "landing",
     children: [
@@ -53,7 +54,6 @@ const navItems = [
     ]
   },
   { name: "Architecture", icon: Layers, href: "#architecture", view: "landing" },
-  { name: "Case Studies", icon: Briefcase, href: "#case-studies" },
   { name: "Contact", icon: Mail, href: "#contact", view: "landing" },
 ];
 
@@ -72,14 +72,16 @@ export function Sidebar({ className, activeView, onViewChange, isOpen, setIsOpen
         }, 100);
       }
     }
-    // Automatically hide sidebar on click
-    setIsOpen(false);
+    // Automatically hide sidebar on click (Mobile only)
+    if (window.innerWidth < 1024) {
+      setIsOpen(false);
+    }
   };
 
   return (
     <>
       <AnimatePresence>
-        {isOpen && (
+        {(isOpen || window.innerWidth >= 1024) && (
           <>
             {/* Backdrop (Mobile only) */}
             <motion.div
@@ -91,11 +93,10 @@ export function Sidebar({ className, activeView, onViewChange, isOpen, setIsOpen
             />
 
             <motion.aside
-              initial={{ x: -300, opacity: 0 }}
+              initial={window.innerWidth < 1024 ? { x: -300, opacity: 0 } : { x: 0, opacity: 1 }}
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: -300, opacity: 0 }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              onMouseLeave={() => setIsOpen(false)}
               className={cn(
                 "fixed inset-y-0 left-0 z-50 w-[300px] glass border-r border-accent-cyan/30 flex flex-col shadow-2xl shadow-accent-cyan/5",
                 className
@@ -119,7 +120,7 @@ export function Sidebar({ className, activeView, onViewChange, isOpen, setIsOpen
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="h-8 w-8 text-white/40 hover:text-white hover:bg-white/5"
+                    className="h-8 w-8 text-white/40 hover:text-white hover:bg-white/5 lg:hidden"
                     onClick={() => setIsOpen(false)}
                   >
                     <X className="h-4 w-4" />

@@ -7,17 +7,19 @@ import {
   TrendingUp, 
   Search, 
   CheckCircle2, 
-  ArrowRight,
-  Target,
-  Layers,
-  Table as TableIcon,
-  Lightbulb,
-  FileText,
-  BookOpen,
-  Users,
-  ArrowDown,
-  Sparkles,
-  Network
+  ArrowRight, 
+  Target, 
+  Layers, 
+  Table as TableIcon, 
+  Lightbulb, 
+  FileText, 
+  BookOpen, 
+  Users, 
+  ArrowDown, 
+  Sparkles, 
+  Network,
+  Workflow,
+  Layout
 } from "lucide-react";
 import { 
   ResponsiveContainer, 
@@ -194,46 +196,73 @@ export function KnowledgeAssistantProject({ onBack }: KnowledgeAssistantProjectP
       onBack={onBack}
       title="AI Knowledge Base Assistant"
       description="An internal company brain that indexes documentation, Slack history, and meeting transcripts for instant natural language querying and expert-level support."
-      tags={["Node.js", "LlamaIndex", "Anthropic Claude", "Redis", "Vector DB"]}
+      domain="Knowledge Management"
+      tags={["AI Automation Use Case", "RAG", "Enterprise Search"]}
       heroIcon={BrainCircuit}
       heroBanner={<KnowledgeInterfaceHero />}
-      goal="Build an AI-powered knowledge assistant that helps employees quickly retrieve operational information from internal documents and knowledge repositories, reducing search time and improving decision speed."
       businessContext="Organizations rely on massive volumes of internal documentation, including SOPs, policies, manuals, and knowledge bases, to support daily operations. As companies grow, this information becomes fragmented and difficult to access."
+      businessIcon={BookOpen}
       challenges={[
-        "Employees spending excessive time searching for specific operational information.",
-        "Fragmented knowledge across multiple siloed documents and platforms.",
-        "Outdated or inconsistent documentation leading to operational errors.",
-        "Slow onboarding of new employees due to knowledge discovery barriers."
+        "Employees spending excessive time searching for specific information",
+        "Fragmented knowledge across multiple siloed documents and platforms",
+        "Outdated or inconsistent documentation leading to operational errors",
+        "Slow onboarding of new employees due to knowledge discovery barriers"
       ]}
-      opportunityAnalysis={[
-        { process: "Document search", potential: "High", opportunity: "Semantic search using AI to understand intent beyond keywords." },
-        { process: "Knowledge retrieval", potential: "High", opportunity: "AI question answering to provide direct answers from context." },
-        { process: "Employee support", potential: "Medium", opportunity: "Conversational AI assistant for 24/7 internal support." }
-      ]}
-      solutionOverview="An intelligent assistant using Natural Language Processing (NLP) and semantic search (RAG) to retrieve relevant information from internal knowledge sources, allowing users to receive context-aware answers generated directly from company documents."
+      aiOpportunity={{
+        title: "Enterprise Semantic Intelligence",
+        description: "Unlocking the value of internal knowledge assets by transforming static documentation into a conversational, expert-level assistant.",
+        features: [
+          "Semantic search using AI to understand intent beyond keywords",
+          "AI question answering to provide direct answers from context",
+          "Conversational AI assistant for 24/7 internal support",
+          "Automated indexing of fragmented knowledge sources"
+        ]
+      }}
+      solutionOverview="An intelligent assistant using Natural Language Processing (NLP) and semantic search (RAG) to retrieve relevant information from internal knowledge sources."
       workflowSteps={[
-        { label: "Knowledge Sources", icon: BookOpen, sub: "SOPs & Manuals", description: "Aggregating internal documents, Slack history, and meeting transcripts from across the organization." },
-        { label: "Data Processing", icon: Database, sub: "Indexing", description: "Parsing documents and generating high-dimensional vector embeddings for semantic search." },
-        { label: "AI Knowledge Engine", icon: Cpu, sub: "RAG Reasoning", description: "Semantic search combined with LLM reasoning to synthesize accurate, context-aware answers." },
-        { label: "User Interface", icon: MessageSquare, sub: "Chat Assistant", description: "A conversational interface providing instant access to the company's collective intelligence." }
+        { label: "Data Sources", icon: BookOpen, sub: "SOPs & Manuals", description: "Aggregating internal documents, Slack history, and meeting transcripts." },
+        { label: "Processing", icon: Database, sub: "Vector Indexing", description: "Parsing documents and generating high-dimensional vector embeddings for search." },
+        { label: "AI Analysis", icon: Cpu, sub: "RAG Reasoning", description: "Semantic search combined with LLM reasoning to synthesize accurate answers." },
+        { label: "Output", icon: MessageSquare, sub: "Chat Assistant", description: "A conversational interface providing instant access to collective intelligence." }
       ]}
       architecture={[
-        { title: "Document Ingestion Pipeline", description: "Automated connectors for Google Drive, Confluence, and Slack to sync documentation." },
-        { title: "Vector Database", description: "Pinecone or Milvus cluster storing document embeddings for sub-second semantic retrieval." },
-        { title: "AI Reasoning Layer", description: "Anthropic Claude 3.5 Sonnet models performing RAG-based question answering." },
-        { title: "Integration Layer", description: "Slack bot and internal web portal integrations for seamless employee access." }
-      ]}
-      techStack={[
-        { category: "AI & LLM", tools: ["Anthropic Claude", "LlamaIndex", "OpenAI Embeddings"] },
-        { category: "Vector Storage", tools: ["Pinecone", "Redis Stack", "PostgreSQL"] },
-        { category: "Backend", tools: ["Node.js", "TypeScript", "Python"] },
-        { category: "Connectors", tools: ["Slack API", "Confluence API", "Google Drive API"] }
+        { 
+          id: "ingestion", 
+          title: "Data Integration Layer", 
+          description: "Connectors for Google Drive, Confluence, and Slack to sync documentation.",
+          icon: Database,
+          position: { x: 20, y: 30 },
+          connections: ["vector"]
+        },
+        { 
+          id: "vector", 
+          title: "Automation Engine", 
+          description: "LlamaIndex manages the document indexing and retrieval logic.",
+          icon: Workflow,
+          position: { x: 50, y: 30 },
+          connections: ["ai"]
+        },
+        { 
+          id: "ai", 
+          title: "AI Processing Layer", 
+          description: "Anthropic Claude 3.5 Sonnet models performing RAG-based answering.",
+          icon: Cpu,
+          position: { x: 80, y: 30 },
+          connections: ["ui"]
+        },
+        { 
+          id: "ui", 
+          title: "Output Interface", 
+          description: "Slack bot and internal web portal for employee access.",
+          icon: Layout,
+          position: { x: 50, y: 70 }
+        }
       ]}
       impact={[
-        { label: "Search Time", value: "-75%", desc: "Reduction in time spent searching for operational information." },
-        { label: "Onboarding", value: "2x", desc: "Increase in speed of new employee operational readiness." },
-        { label: "Productivity", value: "+30%", desc: "Estimated gain in employee throughput for knowledge-heavy tasks." },
-        { label: "Accuracy", value: "98%", desc: "Self-reported accuracy of AI-generated answers by internal users." }
+        { label: "Efficiency Improvement", value: "-75%", desc: "Reduction in time spent searching for information." },
+        { label: "Automation Coverage", value: "92%", desc: "Of internal queries resolved without human intervention." },
+        { label: "Operational Speed", value: "12x", desc: "Faster information retrieval compared to manual search." },
+        { label: "Onboarding Speed", value: "2x", desc: "Increase in speed of new employee readiness." }
       ]}
       transformationInsight="Internal knowledge is often underutilized due to poor accessibility. By combining document processing, semantic search, and AI assistants, organizations can unlock the value of their knowledge assets and significantly improve operational productivity."
     >
