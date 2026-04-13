@@ -215,20 +215,20 @@ export default function App() {
                   transition={{ duration: 0.8 }}
                   className="max-w-4xl relative z-10"
                 >
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-cyan/10 border border-cyan-400/40 text-[10px] font-mono text-accent-cyan uppercase tracking-[0.2em] mb-8 shadow-[0_0_12px_rgba(0,255,255,0.2)]">
-                    <span className="relative flex h-2 w-2">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-cyan opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-accent-cyan"></span>
-                    </span>
-                    Core Engine v4.0.2
-                  </div>
-                  
-                  <h1 className="text-6xl lg:text-8xl font-display font-bold leading-[0.9] tracking-tighter mb-10">
+                  <h1 className="text-6xl lg:text-8xl font-display font-bold leading-[0.9] tracking-tighter mb-6">
                     AI Operations <br />
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan via-white to-accent-violet">
                       Redefined.
                     </span>
                   </h1>
+
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-cyan/10 border border-cyan-400/40 text-[10px] font-mono text-accent-cyan uppercase tracking-[0.2em] mb-8 shadow-[0_0_12px_rgba(0,255,255,0.2)]">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-cyan opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-accent-cyan"></span>
+                    </span>
+                    Modern Intelligence. Trusted Experience.
+                  </div>
                   
                   <p className="text-xl lg:text-2xl text-white/50 leading-relaxed max-w-2xl mb-12 font-light">
                     Orchestrating complex business logic through autonomous agents and predictive intelligence.
