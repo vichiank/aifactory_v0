@@ -113,7 +113,7 @@ export function AboutPage({ onBack }: AboutPageProps) {
                   <img 
                     src="/profile.jpg" 
                     alt="V. Pattarakeeratiworrakul"
-                    className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                    className="w-full h-full object-cover transition-all duration-500"
                     referrerPolicy="no-referrer"
                     onError={(e) => {
                       e.currentTarget.src = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop";
