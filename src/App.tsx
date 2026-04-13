@@ -86,8 +86,30 @@ const projects = [
 ];
 
 export default function App() {
-  const [currentView, setCurrentView] = React.useState<"landing" | "project-1" | "project-2" | "project-3" | "project-4" | "project-5" | "project-6" | "about">("landing");
+  const [currentView, setCurrentView] = React.useState<"landing" | "project-1" | "project-2" | "project-3" | "project-4" | "project-5" | "project-6" | "about" | "privacy">("landing");
   const [isLoading, setIsLoading] = React.useState(false);
+
+  // Handle deep linking via URL hash
+  React.useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace("#", "");
+      if (hash && hash !== "") {
+        const validViews = ["landing", "project-1", "project-2", "project-3", "project-4", "project-5", "project-6", "about", "privacy"];
+        const targetView = hash === "home" ? "landing" : hash;
+        
+        if (validViews.includes(targetView)) {
+          setCurrentView(targetView as any);
+        }
+      }
+    };
+
+    // Check on mount
+    handleHashChange();
+
+    // Listen for changes
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
   
   // Inquiry Form State
   const [inquiryForm, setInquiryForm] = React.useState({ email: "", message: "" });
@@ -128,6 +150,10 @@ export default function App() {
       setCurrentView(view);
       setIsLoading(false);
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      
+      // Update hash
+      const hash = view === "landing" ? "home" : view;
+      window.location.hash = hash;
     }, 400);
   };
 
