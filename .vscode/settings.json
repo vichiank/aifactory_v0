@@ -1,0 +1,5 @@
+{
+    "scm.repositories.explorer": true,
+    "git.autofetch": true,
+    "github.copilot.chat.copilotMemory.enabled": true
+}
