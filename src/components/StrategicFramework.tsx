@@ -257,7 +257,7 @@ export function StrategicFramework() {
                   )}
                 >
                   <div className={cn(
-                    "w-20 h-20 lg:w-24 lg:h-24 rounded-full glass border flex items-center justify-center transition-all duration-500 relative",
+                    "w-24 h-24 lg:w-32 lg:h-32 rounded-full glass border flex items-center justify-center transition-all duration-500 relative",
                     activeCapability === item.id 
                       ? "border-accent-cyan/60 shadow-[0_0_30px_rgba(0,245,255,0.3)]" 
                       : "border-white/10 hover:border-accent-cyan/40"
@@ -268,12 +268,12 @@ export function StrategicFramework() {
                       activeCapability === item.id ? "opacity-100 animate-pulse-slow" : "opacity-0"
                     )} />
                     <item.icon className={cn(
-                      "h-8 w-8 lg:h-10 lg:w-10 transition-colors duration-500",
+                      "h-10 w-10 lg:h-12 lg:w-12 transition-colors duration-500",
                       activeCapability === item.id ? "text-accent-cyan" : "text-white/50"
                     )} />
                   </div>
                   <span className={cn(
-                    "text-xs font-display font-bold uppercase tracking-widest text-center max-w-[120px] transition-colors duration-500",
+                    "text-xs lg:text-sm font-display font-bold uppercase tracking-widest text-center max-w-[140px] transition-colors duration-500",
                     activeCapability === item.id ? "text-white" : "text-white/40"
                   )}>
                     {item.title}
@@ -395,7 +395,7 @@ export function StrategicFramework() {
         <div>
           <div className="flex items-center gap-4 mb-16">
             <div className="h-px flex-1 bg-gradient-to-r from-transparent to-white/10" />
-            <h3 className="text-sm font-mono text-accent-violet uppercase tracking-[0.3em]">Part 2: Operating Model</h3>
+            <h3 className="text-sm font-mono text-accent-cyan uppercase tracking-[0.3em]">Part 2: Operating Model</h3>
             <div className="h-px flex-1 bg-gradient-to-l from-transparent to-white/10" />
           </div>
 
@@ -495,28 +495,28 @@ export function StrategicFramework() {
                   transition={{ delay: i * 0.1, duration: 0.5 }}
                   className="group"
                 >
-                  <div className="glass-card px-3 py-4 rounded-xl border border-white/10 group-hover:border-accent-cyan/40 transition-all duration-500 h-full min-h-[140px] flex flex-col items-center text-center relative overflow-hidden">
+                  <div className="glass-card px-5 py-8 rounded-2xl border border-white/10 group-hover:border-accent-cyan/40 transition-all duration-500 h-full min-h-[200px] flex flex-col items-center text-center relative overflow-hidden">
                     {/* Active Pulse Effect */}
                     <div className="absolute inset-0 bg-accent-cyan/5 opacity-0 group-hover:opacity-100 transition-opacity" />
                     
-                    <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform relative">
-                      <step.icon className="h-3 w-3 text-accent-cyan" />
+                    <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform relative">
+                      <step.icon className="h-5 w-5 text-accent-cyan" />
                       {/* Ripple */}
                       <motion.div 
-                        className="absolute inset-0 rounded-lg border border-accent-cyan/30"
+                        className="absolute inset-0 rounded-xl border border-accent-cyan/30"
                         animate={{ scale: [1, 1.4], opacity: [0.3, 0] }}
                         transition={{ duration: 2, repeat: Infinity, delay: i * 0.5 }}
                       />
                     </div>
 
-                    <div className="absolute top-2 right-3 text-[8px] font-mono text-white/20 font-bold">
+                    <div className="absolute top-4 right-5 text-xs font-mono text-white/20 font-bold">
                       0{step.id}
                     </div>
 
-                    <h4 className="text-[10px] font-display font-bold text-white mb-1.5 leading-tight group-hover:text-accent-cyan transition-colors">
+                    <h4 className="text-xs lg:text-sm font-display font-bold text-white mb-3 leading-tight group-hover:text-accent-cyan transition-colors">
                       {step.title}
                     </h4>
-                    <p className="text-[9px] text-white/40 leading-snug">
+                    <p className="text-[10px] lg:text-xs text-white/40 leading-relaxed">
                       {step.desc}
                     </p>
                   </div>

@@ -11,6 +11,7 @@ import { KnowledgeAssistantProject } from "@/components/KnowledgeAssistantProjec
 import { DemandForecastingProject } from "@/components/DemandForecastingProject";
 import { NeuralBackground } from "@/components/NeuralBackground";
 import { StrategicFramework } from "@/components/StrategicFramework";
+import { PrivacyPolicy } from "@/components/PrivacyPolicy";
 import { ContactHeader } from "@/components/ContactHeader";
 import { 
   MessageSquare, 
@@ -35,6 +36,9 @@ import {
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
+
+import { db } from "@/lib/firebase";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 const projects = [
   {
@@ -98,18 +102,15 @@ export default function App() {
     setSubmitStatus("idle");
 
     try {
-      const response = await fetch("/api/inquiry", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(inquiryForm),
+      // Use Firebase Firestore instead of local API
+      await addDoc(collection(db, "inquiries"), {
+        email: inquiryForm.email,
+        message: inquiryForm.message,
+        timestamp: new Date().toISOString()
       });
 
-      if (response.ok) {
-        setSubmitStatus("success");
-        setInquiryForm({ email: "", message: "" });
-      } else {
-        setSubmitStatus("error");
-      }
+      setSubmitStatus("success");
+      setInquiryForm({ email: "", message: "" });
     } catch (error) {
       console.error("Submission error:", error);
       setSubmitStatus("error");
@@ -139,7 +140,7 @@ export default function App() {
       
       <main className={cn(
         "flex-1 min-w-0 transition-all duration-500 relative",
-        "ml-[240px] lg:ml-[300px]" // Always have margin for persistent sidebar
+        "ml-[280px] lg:ml-[320px]" // Always have margin for persistent sidebar
       )}>
         {/* Background Visual Details */}
         <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
@@ -263,7 +264,7 @@ export default function App() {
               {/* Architecture Section */}
               <section id="architecture" className="py-12 px-8 lg:px-16 bg-white/[0.02]">
                 <div className="text-center max-w-3xl mx-auto mb-12">
-                  <h2 className="text-3xl font-display font-bold mb-4">Enterprise AI Architecture</h2>
+                  <h2 className="text-3xl font-display font-bold mb-4 text-accent-cyan neon-text-cyan">Enterprise AI Architecture</h2>
                   <p className="text-white/50">
                     A modular, scalable, and secure architecture designed to transform raw enterprise data into strategic intelligence through autonomous agents and predictive models.
                   </p>
@@ -474,6 +475,15 @@ export default function App() {
                   </div>
                 </div>
               </footer>
+            </motion.div>
+          ) : currentView === "privacy" ? (
+            <motion.div
+              key="privacy"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <PrivacyPolicy />
             </motion.div>
           ) : currentView === "project-1" ? (
             <ProjectPage onBack={() => handleViewChange("landing")} />

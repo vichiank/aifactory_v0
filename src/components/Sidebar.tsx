@@ -9,7 +9,7 @@ import {
   ChevronDown, 
   ChevronRight,
   MessageSquare,
-  Wand2,
+  Sparkles,
   BarChart3,
   ShieldCheck,
   BrainCircuit,
@@ -44,7 +44,7 @@ const navItems = [
     view: "landing",
     children: [
       { name: "Customer Support Copilot", icon: MessageSquare, href: "#project-1", view: "project-1" },
-      { name: "Marketplace Listing Generator", icon: Wand2, href: "#project-2", view: "project-2" },
+      { name: "Marketplace Listing Generator", icon: Sparkles, href: "#project-2", view: "project-2" },
       { name: "Marketing Report Agent", icon: BarChart3, href: "#project-3", view: "project-3" },
       { name: "Finance Reconciliation", icon: ShieldCheck, href: "#project-4", view: "project-4" },
       { name: "Knowledge Assistant", icon: BrainCircuit, href: "#project-5", view: "project-5" },
@@ -53,6 +53,7 @@ const navItems = [
   },
   { name: "Architecture", icon: Layers, href: "#architecture", view: "landing" },
   { name: "Contact", icon: Mail, href: "#contact", view: "landing" },
+  { name: "Privacy Policy", icon: ShieldCheck, href: "#privacy", view: "privacy" },
 ];
 
 export function Sidebar({ className, activeView, onViewChange }: SidebarProps) {
@@ -78,7 +79,7 @@ export function Sidebar({ className, activeView, onViewChange }: SidebarProps) {
         initial={false}
         animate={{ x: 0, opacity: 1 }}
         className={cn(
-          "fixed inset-y-0 left-0 z-50 w-[240px] lg:w-[300px] glass border-r border-accent-cyan/30 flex flex-col shadow-2xl shadow-accent-cyan/5",
+          "fixed inset-y-0 left-0 z-50 w-[280px] lg:w-[320px] glass border-r border-accent-cyan/30 flex flex-col shadow-2xl shadow-accent-cyan/5 transition-all duration-300 ease-in-out hover:w-[300px] lg:hover:w-[360px]",
           className
         )}
       >
@@ -101,7 +102,7 @@ export function Sidebar({ className, activeView, onViewChange }: SidebarProps) {
 
               <ScrollArea className="h-[calc(100vh-160px)] -mx-4 px-4">
                 <LayoutGroup>
-                  <nav className="space-y-2">
+                  <nav className="space-y-2 p-6">
                   {navItems.map((item) => {
                     const isActive = activeView === item.view || (item.view === "landing" && activeView === "landing");
 
@@ -131,19 +132,19 @@ export function Sidebar({ className, activeView, onViewChange }: SidebarProps) {
                               </Button>
                             }
                           />
-                          <CollapsibleContent className="pl-9 space-y-1 overflow-hidden data-[state=closed]:animate-collapse-up data-[state=open]:animate-collapse-down">
+                          <CollapsibleContent className="pl-9 pr-4 space-y-1 overflow-hidden data-[state=closed]:animate-collapse-up data-[state=open]:animate-collapse-down">
                             {item.children.map((child) => (
                               <button
                                 key={child.name}
                                 onClick={() => handleNavClick(child)}
                                 className={cn(
-                                  "w-full flex items-center gap-3 py-2 px-3 rounded-md text-sm transition-all duration-200 whitespace-nowrap hover:scale-[1.02] active:scale-[0.98]",
+                                  "w-full flex items-center gap-3 py-2 px-3 rounded-md text-[11px] transition-all duration-200 whitespace-nowrap hover:scale-[1.02] active:scale-[0.98] group",
                                   activeView === child.view 
                                     ? "text-accent-cyan bg-white/5 shadow-[inset_0_0_10px_rgba(0,245,255,0.05)]" 
                                     : "text-white/50 hover:text-accent-cyan hover:bg-white/5 hover:neon-text-cyan hover:shadow-[0_0_10px_rgba(0,245,255,0.1)]"
                                 )}
                               >
-                                <child.icon className={cn("h-3.5 w-3.5 transition-all", activeView === child.view ? "drop-shadow-[0_0_5px_rgba(0,245,255,0.8)]" : "group-hover:drop-shadow-[0_0_5px_rgba(0,245,255,0.8)]")} />
+                                <child.icon className={cn("h-3.5 w-3.5 shrink-0 transition-all", activeView === child.view ? "text-accent-cyan drop-shadow-[0_0_5px_rgba(0,245,255,0.8)]" : "text-white/40 group-hover:text-accent-cyan group-hover:drop-shadow-[0_0_5px_rgba(0,245,255,0.8)]")} />
                                 <span>{child.name}</span>
                                 {activeView === child.view && (
                                   <motion.div 
