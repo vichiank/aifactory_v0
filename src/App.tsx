@@ -83,7 +83,6 @@ const projects = [
 
 export default function App() {
   const [currentView, setCurrentView] = React.useState<"landing" | "project-1" | "project-2" | "project-3" | "project-4" | "project-5" | "project-6" | "about">("landing");
-  const [isSidebarOpen, setIsSidebarOpen] = React.useState(true);
   const [isLoading, setIsLoading] = React.useState(false);
   
   // Inquiry Form State
@@ -123,10 +122,6 @@ export default function App() {
 
   const handleViewChange = (view: any) => {
     if (view === currentView) return;
-    // Collapse sidebar when navigating (Mobile only)
-    if (window.innerWidth < 1024) {
-      setIsSidebarOpen(false);
-    }
     setIsLoading(true);
     setTimeout(() => {
       setCurrentView(view);
@@ -140,14 +135,11 @@ export default function App() {
       <Sidebar 
         activeView={currentView} 
         onViewChange={handleViewChange} 
-        isOpen={isSidebarOpen}
-        setIsOpen={setIsSidebarOpen}
       />
       
       <main className={cn(
         "flex-1 min-w-0 transition-all duration-500 relative",
-        "lg:ml-[300px]", // Always have margin on desktop
-        isSidebarOpen ? "ml-0" : "ml-0" // Mobile logic handled by sidebar overlay
+        "ml-[240px] lg:ml-[300px]" // Always have margin for persistent sidebar
       )}>
         {/* Background Visual Details */}
         <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
@@ -158,14 +150,6 @@ export default function App() {
         {/* Top Dashboard Header */}
         <header className="sticky top-0 z-40 glass border-b border-cyan-400/20 px-8 py-6 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <Button
-              variant="ghost"
-              size="icon"
-              className="text-white/60 hover:text-accent-cyan transition-colors lg:hidden"
-              onClick={() => setIsSidebarOpen(true)}
-            >
-              <Menu className="h-5 w-5" />
-            </Button>
             <div className="flex flex-col">
               <h2 className="text-2xl font-display font-bold text-white tracking-tight relative">
                 {currentView === "landing" ? "Dashboard Overview" : "Use Case Analysis"}

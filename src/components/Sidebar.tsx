@@ -26,14 +26,12 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence, LayoutGroup } from "motion/react";
 
 interface SidebarProps {
   className?: string;
   activeView: string;
   onViewChange: (view: any) => void;
-  isOpen: boolean;
-  setIsOpen: (open: boolean) => void;
 }
 
 const navItems = [
@@ -57,7 +55,7 @@ const navItems = [
   { name: "Contact", icon: Mail, href: "#contact", view: "landing" },
 ];
 
-export function Sidebar({ className, activeView, onViewChange, isOpen, setIsOpen }: SidebarProps) {
+export function Sidebar({ className, activeView, onViewChange }: SidebarProps) {
   const [projectsOpen, setProjectsOpen] = React.useState(true);
 
   const handleNavClick = (item: any) => {
@@ -72,36 +70,18 @@ export function Sidebar({ className, activeView, onViewChange, isOpen, setIsOpen
         }, 100);
       }
     }
-    // Automatically hide sidebar on click (Mobile only)
-    if (window.innerWidth < 1024) {
-      setIsOpen(false);
-    }
   };
 
   return (
     <>
-      <AnimatePresence>
-        {(isOpen || window.innerWidth >= 1024) && (
-          <>
-            {/* Backdrop (Mobile only) */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsOpen(false)}
-              className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm lg:hidden"
-            />
-
-            <motion.aside
-              initial={window.innerWidth < 1024 ? { x: -300, opacity: 0 } : { x: 0, opacity: 1 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: -300, opacity: 0 }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className={cn(
-                "fixed inset-y-0 left-0 z-50 w-[300px] glass border-r border-accent-cyan/30 flex flex-col shadow-2xl shadow-accent-cyan/5",
-                className
-              )}
-            >
+      <motion.aside
+        initial={false}
+        animate={{ x: 0, opacity: 1 }}
+        className={cn(
+          "fixed inset-y-0 left-0 z-50 w-[240px] lg:w-[300px] glass border-r border-accent-cyan/30 flex flex-col shadow-2xl shadow-accent-cyan/5",
+          className
+        )}
+      >
               <div className="p-8">
                 <div className="flex items-center justify-between mb-10">
                   <div className="flex items-center gap-3">
@@ -117,18 +97,11 @@ export function Sidebar({ className, activeView, onViewChange, isOpen, setIsOpen
                       </p>
                     </div>
                   </div>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="h-8 w-8 text-white/40 hover:text-white hover:bg-white/5 lg:hidden"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <X className="h-4 w-4" />
-                  </Button>
                 </div>
 
               <ScrollArea className="h-[calc(100vh-160px)] -mx-4 px-4">
-                <nav className="space-y-2">
+                <LayoutGroup>
+                  <nav className="space-y-2">
                   {navItems.map((item) => {
                     const isActive = activeView === item.view || (item.view === "landing" && activeView === "landing");
 
@@ -146,13 +119,13 @@ export function Sidebar({ className, activeView, onViewChange, isOpen, setIsOpen
                                 variant="ghost"
                                 onClick={() => handleNavClick(item)}
                                 className={cn(
-                                  "w-full justify-between hover:bg-white/5 text-white/70 hover:text-white group transition-all duration-300",
-                                  isActive && "bg-white/10 text-white"
+                                  "w-full justify-between hover:bg-white/5 text-white/70 hover:text-white group transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]",
+                                  isActive && "bg-white/10 text-white shadow-[0_0_15px_rgba(0,245,255,0.1)]"
                                 )}
                               >
                                 <div className="flex items-center gap-3">
-                                  <item.icon className={cn("h-4 w-4 transition-colors", isActive ? "text-accent-cyan" : "group-hover:text-accent-cyan")} />
-                                  <span className="font-medium whitespace-nowrap">{item.name}</span>
+                                  <item.icon className={cn("transition-all duration-300", isActive ? "text-accent-cyan drop-shadow-[0_0_8px_rgba(0,245,255,0.8)]" : "group-hover:text-accent-cyan group-hover:drop-shadow-[0_0_8px_rgba(0,245,255,0.8)]", "h-4 w-4")} />
+                                  <span className={cn("font-medium whitespace-nowrap transition-all duration-300", isActive ? "neon-text-cyan" : "group-hover:neon-text-cyan")}>{item.name}</span>
                                 </div>
                                 {projectsOpen ? <ChevronDown className="h-4 w-4 opacity-50" /> : <ChevronRight className="h-4 w-4 opacity-50" />}
                               </Button>
@@ -164,14 +137,20 @@ export function Sidebar({ className, activeView, onViewChange, isOpen, setIsOpen
                                 key={child.name}
                                 onClick={() => handleNavClick(child)}
                                 className={cn(
-                                  "w-full flex items-center gap-3 py-2 px-3 rounded-md text-sm transition-all duration-200 whitespace-nowrap",
+                                  "w-full flex items-center gap-3 py-2 px-3 rounded-md text-sm transition-all duration-200 whitespace-nowrap hover:scale-[1.02] active:scale-[0.98]",
                                   activeView === child.view 
                                     ? "text-accent-cyan bg-white/5 shadow-[inset_0_0_10px_rgba(0,245,255,0.05)]" 
-                                    : "text-white/50 hover:text-accent-cyan hover:bg-white/5"
+                                    : "text-white/50 hover:text-accent-cyan hover:bg-white/5 hover:neon-text-cyan hover:shadow-[0_0_10px_rgba(0,245,255,0.1)]"
                                 )}
                               >
-                                <child.icon className="h-3.5 w-3.5" />
+                                <child.icon className={cn("h-3.5 w-3.5 transition-all", activeView === child.view ? "drop-shadow-[0_0_5px_rgba(0,245,255,0.8)]" : "group-hover:drop-shadow-[0_0_5px_rgba(0,245,255,0.8)]")} />
                                 <span>{child.name}</span>
+                                {activeView === child.view && (
+                                  <motion.div 
+                                    layoutId="active-pill"
+                                    className="ml-auto w-1 h-1 rounded-full bg-accent-cyan shadow-[0_0_8px_rgba(0,245,255,0.8)]"
+                                  />
+                                )}
                               </button>
                             ))}
                           </CollapsibleContent>
@@ -184,17 +163,17 @@ export function Sidebar({ className, activeView, onViewChange, isOpen, setIsOpen
                         key={item.name}
                         onClick={() => handleNavClick(item)}
                         className={cn(
-                          "w-full flex items-center gap-3 py-2.5 px-4 rounded-xl text-sm font-medium transition-all duration-300 group whitespace-nowrap",
+                          "w-full flex items-center gap-3 py-2.5 px-4 rounded-xl text-sm font-medium transition-all duration-300 group whitespace-nowrap hover:scale-[1.02] active:scale-[0.98]",
                           isActive
                             ? "bg-white/10 text-white border border-cyan-400/40 shadow-[0_0_12px_rgba(0,255,255,0.2)]" 
-                            : "text-white/60 hover:text-white hover:bg-white/5"
+                            : "text-white/60 hover:text-white hover:bg-white/5 hover:neon-text-cyan hover:shadow-[0_0_15px_rgba(0,245,255,0.1)]"
                         )}
                       >
                         <item.icon className={cn(
-                          "h-4 w-4 transition-colors",
-                          isActive ? "text-accent-cyan" : "group-hover:text-accent-cyan"
+                          "h-4 w-4 transition-all duration-300",
+                          isActive ? "text-accent-cyan drop-shadow-[0_0_8px_rgba(0,245,255,0.8)]" : "group-hover:text-accent-cyan group-hover:drop-shadow-[0_0_8px_rgba(0,245,255,0.8)]"
                         )} />
-                        <span>{item.name}</span>
+                        <span className="transition-all duration-300 group-hover:neon-text-cyan">{item.name}</span>
                         {isActive && (
                           <motion.div 
                             layoutId="active-pill"
@@ -205,7 +184,8 @@ export function Sidebar({ className, activeView, onViewChange, isOpen, setIsOpen
                     );
                   })}
                 </nav>
-              </ScrollArea>
+              </LayoutGroup>
+            </ScrollArea>
             </div>
 
             <div className="mt-auto p-8 border-t border-white/5">
@@ -230,9 +210,6 @@ export function Sidebar({ className, activeView, onViewChange, isOpen, setIsOpen
               </div>
             </div>
           </motion.aside>
-        </>
-      )}
-    </AnimatePresence>
-  </>
-);
+      </>
+    );
 }
