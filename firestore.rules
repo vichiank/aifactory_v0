@@ -1,0 +1,50 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // ===============================================================
+    // Assumed Data Model
+    // ===============================================================
+    //
+    // Collection: inquiries
+    // Document ID: auto-generated
+    // Fields:
+    //   - email: string (required, email format)
+    //   - message: string (required, max 5000 chars)
+    //   - timestamp: string (required, ISO 8601)
+    //
+    // ===============================================================
+
+    // ===============================================================
+    // Helper Functions
+    // ===============================================================
+    
+    function isValidEmail(email) {
+      return email is string && email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
+    }
+
+    function isValidInquiry(data) {
+      return data.keys().hasAll(['email', 'message', 'timestamp']) &&
+             data.keys().hasOnly(['email', 'message', 'timestamp']) &&
+             isValidEmail(data.email) &&
+             data.message is string && data.message.size() > 0 && data.message.size() <= 5000 &&
+             data.timestamp is string;
+    }
+
+    // ===============================================================
+    // Rules
+    // ===============================================================
+
+    match /inquiries/{inquiryId} {
+      // Allow anyone to create an inquiry (public contact form)
+      allow create: if isValidInquiry(request.resource.data);
+      
+      // Deny all other access by default
+      allow read, update, delete: if false;
+    }
+    
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

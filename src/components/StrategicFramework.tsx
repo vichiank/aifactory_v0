@@ -395,7 +395,7 @@ export function StrategicFramework() {
         <div>
           <div className="flex items-center gap-4 mb-16">
             <div className="h-px flex-1 bg-gradient-to-r from-transparent to-white/10" />
-            <h3 className="text-sm font-mono text-accent-violet uppercase tracking-[0.3em]">Part 2: Operating Model</h3>
+            <h3 className="text-sm font-mono text-accent-cyan uppercase tracking-[0.3em]">Part 2: Operating Model</h3>
             <div className="h-px flex-1 bg-gradient-to-l from-transparent to-white/10" />
           </div>
 

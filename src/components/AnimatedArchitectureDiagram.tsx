@@ -136,7 +136,7 @@ export function AnimatedArchitectureDiagram() {
             className="absolute left-1/2 -translate-x-1/2 w-full -translate-y-1/2 z-0"
           >
             {/* Group Container with Relative Positioning */}
-            <div className="relative w-full h-44 lg:h-52 glass-card rounded-[2.5rem] border border-white/5 opacity-30">
+            <div className="relative w-full h-44 lg:h-52 glass-card rounded-[2.5rem] border border-accent-cyan/20">
               {/* Group Title - Positioned strictly at the top of the container */}
               <div className="absolute -top-8 left-6 lg:left-10">
                 <div className="flex items-center gap-3">
