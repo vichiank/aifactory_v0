@@ -86,8 +86,8 @@ export function Sidebar({ className, activeView, onViewChange }: SidebarProps) {
               <div className="p-8">
                 <div className="flex items-center justify-between mb-10">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-accent-cyan/10 border border-cyan-400/40 flex items-center justify-center shadow-[0_0_12px_rgba(0,255,255,0.4)]">
-                      <Cpu className="text-accent-cyan h-6 w-6 animate-pulse" />
+                    <div className="w-10 h-10 rounded-xl bg-accent-cyan/10 border border-cyan-400/40 flex items-center justify-center shadow-[0_0_12px_rgba(0,255,255,0.4)] overflow-hidden">
+                      <img src="/logo.png" alt="Logo" className="w-7 h-7 object-contain" />
                     </div>
                     <div>
                       <h1 className="text-2xl font-display font-bold tracking-tighter neon-text-cyan">
