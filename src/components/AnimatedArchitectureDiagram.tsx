@@ -127,7 +127,7 @@ export function AnimatedArchitectureDiagram() {
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-accent-cyan/5 blur-[120px] rounded-full pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent-violet/5 blur-[120px] rounded-full pointer-events-none" />
 
-      <div className="relative h-[800px] w-full max-w-5xl mx-auto">
+      <div className="relative h-[900px] lg:h-[1000px] w-full max-w-6xl mx-auto">
         {/* Layer Group Titles & Containers */}
         {LAYERS.map((layer) => (
           <div 
@@ -136,12 +136,12 @@ export function AnimatedArchitectureDiagram() {
             className="absolute left-1/2 -translate-x-1/2 w-full -translate-y-1/2 z-0"
           >
             {/* Group Container with Relative Positioning */}
-            <div className="relative w-full h-36 glass-card rounded-[2.5rem] border border-white/5 opacity-30">
+            <div className="relative w-full h-44 lg:h-52 glass-card rounded-[2.5rem] border border-white/5 opacity-30">
               {/* Group Title - Positioned strictly at the top of the container */}
-              <div className="absolute -top-6 left-6 lg:left-10">
+              <div className="absolute -top-8 left-6 lg:left-10">
                 <div className="flex items-center gap-3">
-                  <div className="w-1 h-3 bg-accent-cyan rounded-full shadow-[0_0_10px_rgba(0,245,255,0.8)]" />
-                  <h3 className="text-[10px] lg:text-xs font-mono text-accent-cyan uppercase tracking-[0.4em] font-bold drop-shadow-[0_0_8px_rgba(0,245,255,0.4)]">
+                  <div className="w-1.5 h-4 bg-accent-cyan rounded-full shadow-[0_0_10px_rgba(0,245,255,0.8)]" />
+                  <h3 className="text-xs lg:text-sm font-mono text-accent-cyan uppercase tracking-[0.4em] font-bold drop-shadow-[0_0_8px_rgba(0,245,255,0.4)]">
                     {layer.title}
                   </h3>
                 </div>
@@ -248,34 +248,34 @@ export function AnimatedArchitectureDiagram() {
                 hoveredNodeId === node.id && "opacity-40"
               )} />
 
-              {/* Node Card - Reduced size to 110x110 */}
+              {/* Node Card - Improved size and text */}
               <motion.div 
-                whileHover={{ scale: 1.03 }}
+                whileHover={{ scale: 1.05, y: -5 }}
                 transition={{ duration: 0.2 }}
                 className={cn(
-                  "w-[110px] h-[110px] p-2 rounded-2xl glass border flex flex-col items-center justify-center gap-1.5 transition-all duration-500 relative z-10",
+                  "w-28 h-28 sm:w-32 sm:h-32 lg:w-44 lg:h-44 p-3 lg:p-5 rounded-2xl lg:rounded-3xl glass border flex flex-col items-center justify-center gap-2 lg:gap-3 transition-all duration-500 relative z-10",
                   node.isAI 
-                    ? "border-accent-violet/40 shadow-[0_0_30px_rgba(138,43,226,0.3)] bg-accent-violet/10" 
-                    : "border-white/10 group-hover:border-accent-cyan/50 group-hover:shadow-[0_0_20px_rgba(0,245,255,0.15)]"
+                    ? "border-accent-violet/40 shadow-[0_0_40px_rgba(138,43,226,0.3)] bg-accent-violet/10" 
+                    : "border-white/10 group-hover:border-accent-cyan/50 group-hover:shadow-[0_0_30px_rgba(0,245,255,0.2)]"
                 )}
               >
                 {/* Icon Container */}
                 <div className={cn(
-                  "w-9 h-9 rounded-xl bg-white/5 flex items-center justify-center transition-colors duration-500",
-                  node.isAI ? "bg-accent-violet/10" : "group-hover:bg-accent-cyan/10"
+                  "w-10 h-10 lg:w-14 lg:h-14 rounded-xl lg:rounded-2xl bg-white/5 flex items-center justify-center transition-colors duration-500",
+                  node.isAI ? "bg-accent-violet/15" : "group-hover:bg-accent-cyan/15"
                 )}>
                   <node.icon className={cn(
-                    "h-5 w-5 transition-colors duration-500",
-                    node.isAI ? "text-accent-violet" : "text-white/40 group-hover:text-accent-cyan group-hover:brightness-125"
+                    "h-5 w-5 lg:h-7 lg:w-7 transition-colors duration-500",
+                    node.isAI ? "text-accent-violet" : "text-white/50 group-hover:text-accent-cyan group-hover:brightness-125"
                   )} />
                 </div>
                 
                 {/* Text Content */}
-                <div className="flex flex-col items-center gap-0.5 max-w-[100px] text-center">
-                  <h4 className="text-[10px] font-bold text-white leading-tight uppercase tracking-tight">
+                <div className="flex flex-col items-center gap-1 max-w-full text-center">
+                  <h4 className="text-[10px] sm:text-xs lg:text-base font-bold text-white leading-tight uppercase tracking-tight lg:tracking-normal">
                     {node.title}
                   </h4>
-                  <p className="text-[8px] text-white/40 leading-tight opacity-70 line-clamp-2">
+                  <p className="text-[8px] sm:text-[9px] lg:text-xs text-white/40 leading-tight lg:leading-normal opacity-80 line-clamp-2 lg:line-clamp-3">
                     {node.subtitle}
                   </p>
                 </div>
