@@ -37,9 +37,6 @@ import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
 
-import { db } from "@/lib/firebase";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-
 const projects = [
   {
     id: "project-1",
@@ -124,15 +121,20 @@ export default function App() {
     setSubmitStatus("idle");
 
     try {
-      // Use Firebase Firestore instead of local API
-      await addDoc(collection(db, "inquiries"), {
-        email: inquiryForm.email,
-        message: inquiryForm.message,
-        timestamp: new Date().toISOString()
+      const response = await fetch("/api/inquiry", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(inquiryForm),
       });
 
-      setSubmitStatus("success");
-      setInquiryForm({ email: "", message: "" });
+      if (response.ok) {
+        setSubmitStatus("success");
+        setInquiryForm({ email: "", message: "" });
+      } else {
+        throw new Error("Failed to send inquiry");
+      }
     } catch (error) {
       console.error("Submission error:", error);
       setSubmitStatus("error");
