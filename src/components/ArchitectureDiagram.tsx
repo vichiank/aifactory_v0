@@ -1,3 +1,5 @@
+"use client"
+
 import * as React from "react";
 import { motion } from "motion/react";
 import { Database, Cpu, Globe, Server, Shield, Zap } from "lucide-react";
