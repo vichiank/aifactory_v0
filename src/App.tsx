@@ -121,12 +121,20 @@ export default function App() {
     setSubmitStatus("idle");
 
     try {
-      const response = await fetch("/api/inquiry", {
+      // Choice B: Using Formspree for static sites like Vercel
+      const FORMSPREE_ENDPOINT = "https://formspree.io/f/mkokjbgk"; 
+      
+      const response = await fetch(FORMSPREE_ENDPOINT, {
         method: "POST",
         headers: {
+          "Accept": "application/json",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(inquiryForm),
+        body: JSON.stringify({
+          email: inquiryForm.email,
+          message: inquiryForm.message,
+          _subject: "New Inquiry from Portfolio",
+        }),
       });
 
       if (response.ok) {
