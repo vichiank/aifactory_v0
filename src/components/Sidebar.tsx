@@ -87,7 +87,7 @@ export function Sidebar({ className, activeView, onViewChange }: SidebarProps) {
                 <div className="flex items-center justify-between mb-10">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl bg-accent-cyan/10 border border-cyan-400/40 flex items-center justify-center shadow-[0_0_12px_rgba(0,255,255,0.4)] overflow-hidden">
-                      <img src="/logo.png" alt="Logo" className="w-7 h-7 object-contain" />
+                      <img src="/logo.png?v=2" alt="Logo" className="w-7 h-7 object-contain" />
                     </div>
                     <div>
                       <h1 className="text-2xl font-display font-bold tracking-tighter neon-text-cyan">
@@ -193,7 +193,7 @@ export function Sidebar({ className, activeView, onViewChange }: SidebarProps) {
               <div className="flex items-center gap-3 p-3 rounded-2xl bg-white/5 border border-white/10">
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-slate-700 to-slate-900 border border-white/10 flex items-center justify-center text-xs font-bold text-white overflow-hidden">
                   <img 
-                    src="/profile.jpg" 
+                    src="/profile.jpg?v=2" 
                     alt="VP" 
                     className="w-full h-full object-cover"
                     onError={(e) => {

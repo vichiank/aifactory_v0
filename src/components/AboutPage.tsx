@@ -111,7 +111,7 @@ export function AboutPage({ onBack }: AboutPageProps) {
                 <div className="absolute -inset-1 bg-gradient-to-r from-accent-cyan to-accent-violet rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
                 <div className="relative aspect-[3/4] rounded-2xl bg-background border border-white/10 flex items-center justify-center overflow-hidden">
                   <img 
-                    src="/profile.jpg" 
+                    src="/profile.jpg?v=2" 
                     alt="V. Pattarakeeratiworrakul"
                     className="w-full h-full object-cover transition-all duration-500"
                     referrerPolicy="no-referrer"
