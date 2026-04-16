@@ -10,6 +10,19 @@ async function startServer() {
   app.use(express.json());
 
   // API Route for Inquiry
+  app.get("/api/inquiry", (req, res) => {
+    const filePath = path.join(process.cwd(), "inquiries.json");
+    if (fs.existsSync(filePath)) {
+      try {
+        const data = fs.readFileSync(filePath, "utf8");
+        return res.status(200).json(JSON.parse(data));
+      } catch (e) {
+        return res.status(500).json({ error: "Error reading inquiries" });
+      }
+    }
+    res.status(200).json([]);
+  });
+
   app.post("/api/inquiry", (req, res) => {
     const { email, message } = req.body;
     
